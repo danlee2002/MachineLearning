@@ -34,9 +34,12 @@ $\mathbb{E}(y_0 - \bar{f}(x_0))^2 = var(\bar{f}(x_0)) + [Bias(\bar{f}(x_0))]^2 +
 The notion of the bias variance tradeoff often transfers over to the domain of classification despite being categorical variables. Assume that we want to estimate $f$ on some dataset $\mathcal{D}$ it is clear that one could identify the mean training error rate. Using the following equation: $\frac{1}{n}\sum_{i=1}^nI(y_i \neq \bar{y}_i)$.  Assume for $I$ maps onto $0$ if the variables are equal and $1$ otherwise. 
 ### Bayes Error Classifier:
 It is clear that prediction error is minimize when we consider conditional classifier. In other words we minimize $Pr(Y=j|X= x_0) = \frac{Pr(X =x|Y=y)Pr(Y =y)}{Pr(X)}$. For binary classification, it is clear that the problem boils down to choosing the $Pr(Y=j|X=x)>0.5$. 
-![alt text](images/bayes.png)
+![bayesian error bound](images/bayes.png)
 Note that the purple boundary is called the Bayes error region. 
 The Bayes error rate is statisically optimal so in order to maximize bayes classifier one can simply maximize $\max_{j}Pr(Y=y|X=x_0)$. The Bayes error rate or the minimal error rate then can be given as the following:
 $1 -\mathbb{E}(\max_j Pr(Y=j|X))$.
 ### K-nearest neighbors:
-In theory, one would ideally like to optimize in terms of the Bayes classifier. However, although this is theoretically optimal, reality often does not follow idealizd situtaions since we often do not know the actual conditional distribution of data. There many heuristics that often 
+In theory, one would ideally like to optimize in terms of the Bayes classifier. However, although this is theoretically optimal, reality often does not follow idealizd situtaions since we often do not know the actual conditional distribution of data. There many heuristics that often utilize some notion of Bayesian infernce. One of them is $KNN$. Given some arbitary dataset $\mathcal{D}$, one estimates conditional probability for something like classification via taking the $k$ nearest points based off of a distance metric and taking the average of these values. 
+In essence, we choose the $y$ s.t $Pr(Y=y|X=x_0)=\frac{1}{k}\argmax_{i \in \mathcal{N}}I(y_i =i)$. 
+![alt text](images/k3.png)
+The following exammple clearly shows that KNN produces a classifier that can be very close to an optimal bayes classifier. One problem with KNN is that it varies a lot with choice of $K$. Increasing K reduces variance but at the same time results in increased bias.
